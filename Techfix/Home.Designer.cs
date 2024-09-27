@@ -31,6 +31,7 @@
             button1 = new Button();
             button4 = new Button();
             AddProduct_btn = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -63,11 +64,22 @@
             AddProduct_btn.UseVisualStyleBackColor = true;
             AddProduct_btn.Click += AddProduct_btn_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(140, 234);
+            button2.Name = "button2";
+            button2.Size = new Size(169, 56);
+            button2.TabIndex = 1;
+            button2.Text = "Qutations";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1036, 597);
+            Controls.Add(button2);
             Controls.Add(button4);
             Controls.Add(AddProduct_btn);
             Controls.Add(button1);
@@ -82,5 +94,6 @@
         private Button button1;
         private Button button4;
         private Button AddProduct_btn;
+        private Button button2;
     }
 }

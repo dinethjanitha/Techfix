@@ -65,10 +65,11 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(508, 86);
+            textBox1.Location = new Point(431, 86);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(730, 27);
+            textBox1.Size = new Size(807, 27);
             textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label1
             // 

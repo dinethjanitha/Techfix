@@ -214,5 +214,55 @@ namespace Techfix
             Home home = new Home();
             home.ShowDialog();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            loaddatatotable();
+        }
+
+        public async Task<List<Product>> searchData()
+        {
+            var searchTxt = searchProduct_Box.Text;
+
+            List<Product> products = new List<Product>();
+            var responce = await client.GetAsync($"https://localhost:7138/api/Orders/{searchTxt}/search");
+
+            if (responce.IsSuccessStatusCode)
+            {
+                var json = await responce.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Product>>(json);
+            }
+            else
+            {
+                return new List<Product>();
+            }
+        }
+
+        public async void loaddatatotable()
+        {
+            try
+            {
+                var products = await searchData();
+                if (products != null && products.Count > 0)
+                {
+                    loadproductData.AutoGenerateColumns = true; // Set once
+                    loadproductData.DataSource = products;
+                }
+                else
+                {
+                    MessageBox.Show("No products found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading data: " + ex.Message);
+            }
+        }
+
     }
 }

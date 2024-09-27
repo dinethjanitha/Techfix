@@ -16,7 +16,7 @@ namespace Techfix
         public Home()
         {
             InitializeComponent();
-          
+
         }
 
         private void AddProduct_btn_Click(object sender, EventArgs e)
@@ -43,6 +43,13 @@ namespace Techfix
             this.Hide();
             ManageOrders manageOrders = new ManageOrders();
             manageOrders.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Quatations qt = new Quatations();   
+            qt.ShowDialog();
         }
     }
 }
