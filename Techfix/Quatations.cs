@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Techfix.Models;
 
 namespace Techfix
 {
@@ -29,22 +30,13 @@ namespace Techfix
         {
 
         }
-        public class Product
-        {
-            public string productId { get; set; }
-            public string productName { get; set; }
-            public string productDescription { get; set; }
-            public string productCategory { get; set; }
-            public string quantity { get; set; }
-            public string productprice { get; set; }
-            public string shopName { get; set; }
-        }
+       
 
 
         private async Task<List<Product>> GetAllproducts()
         {
 
-            var responce = await client.GetAsync("https://localhost:7138/api/product/all");
+            var responce = await client.GetAsync("https://localhost:7138/api/product");
             if (responce.IsSuccessStatusCode)
             {
                 var json = await responce.Content.ReadAsStringAsync();
@@ -93,7 +85,7 @@ namespace Techfix
             var searchTxt = qtSearch_Box.Text;
 
             List<Product> products = new List<Product>();
-            var responce = await client.GetAsync($"https://localhost:7138/api/Orders/{searchTxt}/search");
+            var responce = await client.GetAsync($"https://localhost:7138/api/Orders/{searchTxt}");
 
             if (responce.IsSuccessStatusCode)
             {
@@ -160,7 +152,7 @@ namespace Techfix
 
 
             List<Product> products = new List<Product>();
-            var responce = await client.GetAsync($"https://localhost:7138/shop1");
+            var responce = await client.GetAsync($"https://localhost:7138/api/product/shop1");
 
             if (responce.IsSuccessStatusCode)
             {

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Techfix.Models;
 
 namespace Techfix
 {
@@ -66,7 +67,7 @@ namespace Techfix
 
                 try
                 {
-                    var responce = await client.PostAsync("https://localhost:7138/api/Orders/neworder", data);
+                    var responce = await client.PostAsync("https://localhost:7138/api/Orders", data);
 
                     if (responce.IsSuccessStatusCode)
                     {
@@ -91,21 +92,12 @@ namespace Techfix
 
         }
 
-        public class Product
-        {
-            public string productId { get; set; }
-            public string productName { get; set; }
-            public string productDescription { get; set; }
-            public string productCategory { get; set; }
-            public string quantity { get; set; }
-            public string productprice { get; set; }
-            public string shopName { get; set; }
-        }
+        
 
 
         public async Task<List<Product>> loadItems()
         {
-            var responce = await client.GetAsync("https://localhost:7138/api/product/all");
+            var responce = await client.GetAsync("https://localhost:7138/api/product");
 
             if (responce.IsSuccessStatusCode)
             {
@@ -193,7 +185,7 @@ namespace Techfix
             var searchTxt = search_box.Text;
 
             List<Product> products = new List<Product>();
-            var responce = await client.GetAsync($"https://localhost:7138/api/Orders/{searchTxt}/search");
+            var responce = await client.GetAsync($"https://localhost:7138/api/Orders/{searchTxt}");
 
             if (responce.IsSuccessStatusCode)
             {
@@ -213,7 +205,7 @@ namespace Techfix
                 var products = await searchData();
                 if (products != null && products.Count > 0)
                 {
-                    producttable.AutoGenerateColumns = true; // Set once
+                    producttable.AutoGenerateColumns = true;
                     producttable.DataSource = products;
                 }
                 else

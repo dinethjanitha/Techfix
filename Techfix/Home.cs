@@ -48,8 +48,18 @@ namespace Techfix
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Quatations qt = new Quatations();   
+            Quatations qt = new Quatations();
             qt.ShowDialog();
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+            label1.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

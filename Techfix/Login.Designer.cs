@@ -1,6 +1,6 @@
 ﻿namespace Techfix
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -71,6 +71,7 @@
             password_Box.Name = "password_Box";
             password_Box.Size = new Size(261, 43);
             password_Box.TabIndex = 2;
+       
             // 
             // email_Box
             // 
@@ -112,13 +113,13 @@
             label1.TabIndex = 0;
             label1.Text = "Login";
             // 
-            // Form1
+            // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(839, 562);
             Controls.Add(panel1);
-            Name = "Form1";
+            Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panel1.ResumeLayout(false);

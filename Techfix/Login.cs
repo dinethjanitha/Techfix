@@ -1,16 +1,17 @@
 using Newtonsoft.Json;
 using System.Text;
 using System.Text.Json.Serialization;
+using Techfix.Models;
 using Techfix.Operations;
 
 namespace Techfix
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
         UserOp uop = new UserOp();
 
         private readonly HttpClient client = new HttpClient();
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
@@ -30,13 +31,7 @@ namespace Techfix
 
         }
 
-        public class loginResponse
-        {
-            public string message { get; set; }
-            public int user_id { get; set; }
-            public string user_name { get; set; }
-
-        }
+       
         private async void button1_Click(object sender, EventArgs e)
         {
             //uop.email = email_Box.Text;
@@ -73,7 +68,7 @@ namespace Techfix
                 if (responce.IsSuccessStatusCode) { 
                     var result = await responce.Content.ReadAsStringAsync();
 
-                    var loginresponse = JsonConvert.DeserializeObject<loginResponse>(result);
+                    var loginresponse = JsonConvert.DeserializeObject<User>(result);
 
                     SaveUser.userid = Convert.ToInt32(loginresponse.user_id);
                     SaveUser.shopname = loginresponse.user_name.ToString();

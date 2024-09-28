@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Techfix.Models;
 
 namespace Techfix
 {
@@ -23,19 +24,11 @@ namespace Techfix
             loadorders();
         }
 
-        public class Order
-        {
-            public int orderid { get; set; }
-            public string ordername { get; set; }
-            public int itemId { get; set; }
-            public int quantity { get; set; }
-            public string orderDate { get; set; }
-            public double total { get; set; }
-        }
+        
 
         public async Task<List<Order>> GetAllOrders()
         {
-            var response = await client.GetAsync("https://localhost:7138/api/Orders/all");
+            var response = await client.GetAsync("https://localhost:7138/api/Orders");
 
             if (response.IsSuccessStatusCode)
             {
@@ -56,7 +49,7 @@ namespace Techfix
             var orders = await GetAllOrders();
             if (orders != null && orders.Count > 0)
             {
-                ordertable.AutoGenerateColumns = true; // Set once
+                ordertable.AutoGenerateColumns = true;
                 ordertable.DataSource = orders;
             }
             else

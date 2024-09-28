@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Techfix.Models;
 using Techfix.Operations;
 using static Techfix.AddProduct;
 
@@ -55,7 +56,7 @@ namespace Techfix
 
             try
             {
-                var responce = await client.PostAsync("https://localhost:7138/api/product/addproduct", data);
+                var responce = await client.PostAsync("https://localhost:7138/api/product", data);
 
                 if (responce.IsSuccessStatusCode)
                 {
@@ -74,21 +75,12 @@ namespace Techfix
 
         }
 
-        public class Product
-        {
-            public string productId { get; set; }
-            public string productName { get; set; }
-            public string productDescription { get; set; }
-            public string productCategory { get; set; }
-            public string quantity { get; set; }
-            public string productprice { get; set; }
-            public string shopName { get; set; }
-        }
+        
 
         private async Task<List<Product>> GetAllproducts()
         {
 
-            var responce = await client.GetAsync("https://localhost:7138/api/product/all");
+            var responce = await client.GetAsync("https://localhost:7138/api/product");
             if (responce.IsSuccessStatusCode)
             {
                 var json = await responce.Content.ReadAsStringAsync();
@@ -170,7 +162,7 @@ namespace Techfix
 
             try
             {
-                var response = await client.PutAsync($"https://localhost:7138/api/product/{productid}/update", data);
+                var response = await client.PutAsync($"https://localhost:7138/api/product/{productid}", data);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -193,7 +185,7 @@ namespace Techfix
 
             try
             {
-                var responce = await client.DeleteAsync($"https://localhost:7138/api/product/{productid}/delete");
+                var responce = await client.DeleteAsync($"https://localhost:7138/api/product/{productid}");
                 if (responce.IsSuccessStatusCode)
                 {
                     var result = await responce.Content.ReadAsStringAsync();
@@ -227,10 +219,10 @@ namespace Techfix
 
         public async Task<List<Product>> searchData()
         {
-            var searchTxt = searchProduct_Box.Text;
+            var searchTxt = searchProduct_Box.Text.ToString();
 
             List<Product> products = new List<Product>();
-            var responce = await client.GetAsync($"https://localhost:7138/api/Orders/{searchTxt}/search");
+            var responce = await client.GetAsync($"https://localhost:7138/api/product/{searchTxt}");
 
             if (responce.IsSuccessStatusCode)
             {
@@ -250,7 +242,7 @@ namespace Techfix
                 var products = await searchData();
                 if (products != null && products.Count > 0)
                 {
-                    loadproductData.AutoGenerateColumns = true; // Set once
+                    loadproductData.AutoGenerateColumns = true;
                     loadproductData.DataSource = products;
                 }
                 else
